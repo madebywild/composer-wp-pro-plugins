@@ -72,12 +72,13 @@ class WpAiPro {
 		}
 
 		$http     = new Http();
+		$is_all_export = $name === 'WP All Export';
 		$response = json_decode( $http->post( 'https://www.wpallimport.com', array(
 			'edd_action' => 'get_version',
 			'license'    => $license,
 			'item_name'  => $name,
 			'url'        => $url,
-			'version'    => $this->version,
+			'version'    => $is_all_export ? "" : $this->version,
 		) ), true );
 		if ( ! empty( $response['download_link'] ) ) {
 			return $response['download_link'];
